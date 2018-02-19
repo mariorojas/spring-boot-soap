@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
+import org.springframework.ws.soap.SoapVersion;
+import org.springframework.ws.soap.saaj.SaajSoapMessageFactory;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
@@ -29,6 +31,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 		wsdl11Definition.setPortTypeName("CountriesPort");
 		wsdl11Definition.setLocationUri("/ws");
 		wsdl11Definition.setTargetNamespace("http://spring.io/guides/gs-producing-web-service");
+		wsdl11Definition.setCreateSoap12Binding(true); // Habilita binding para SOAP 1.2
 		wsdl11Definition.setSchema(countriesSchema);
 		return wsdl11Definition;
 	}
@@ -36,5 +39,16 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 	@Bean
 	public XsdSchema countriesSchema() {
 		return new SimpleXsdSchema(new ClassPathResource("countries.xsd"));
+	}
+	
+	/**
+	 * Habilita soporte para SOAP 1.2
+	 * @return
+	 */
+	@Bean
+	public SaajSoapMessageFactory messageFactory() {
+	    SaajSoapMessageFactory messageFactory = new SaajSoapMessageFactory();
+	    messageFactory.setSoapVersion(SoapVersion.SOAP_12);
+	    return messageFactory;
 	}
 }

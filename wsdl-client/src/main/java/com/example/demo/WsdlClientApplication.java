@@ -8,14 +8,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.demo.wsdl.CountriesPort_CountriesPortSoap11_Client;
+import com.example.demo.wsdl.CountriesPort_CountriesPortSoap12_Client;
 import com.example.demo.wsdl.Country;
 
 @SpringBootApplication
 public class WsdlClientApplication implements CommandLineRunner {
 
 	private static final Logger LOG = LoggerFactory.getLogger(WsdlClientApplication.class);
-	private CountriesPort_CountriesPortSoap11_Client client = new CountriesPort_CountriesPortSoap11_Client();
+	private CountriesPort_CountriesPortSoap12_Client client = new CountriesPort_CountriesPortSoap12_Client();
 	
 	public static void main(String[] args) {
 		SpringApplication.run(WsdlClientApplication.class, args);
